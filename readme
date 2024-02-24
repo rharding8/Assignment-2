@@ -1,6 +1,14 @@
 **Problem 1**
 Experimental Evaluation:
+For Problem 1, I devised a strategy wherein the first guest to enter the labyrinth would have a different responsibility from all others, without any requirement of direct communication. The first person would be the only one who can re-order the cupcake, no other guests can do so. Furthermore, guests may only eat one cupcake. Thus, whenever the first guest happens upon an empty plate, they take note of that, incrementing a counter. When they've ordered as many cupcakes as there are guests, they alert the minotaur to that.
 
+This is done by using a counter system and a "firstGuest" variable set only for the first passenger into the maze. For most guests, the counter only increments, from it's base of -1, to 0 when they eat their only cupcake, and never again. For the first guest, however, it increments to 0 there but continues to increment every time they ask for a new cupcake. That way it counts the eating of the cupcake the same way for all guests, including the first, without seeming to double-count the first guest in terms of their overall counter.
+
+The Minotaur selects guests at random, as does the program using a random integer generator and an indexed array of guest threads. When the first guest notices all guests have gone, they flag the gameOver flag, which causes the whole game to stop.
+
+Compilation:
+javac Main.java
+java Main
 
 **Problem 2**
 
@@ -11,3 +19,8 @@ Strategy 2 is similar to 1, and would have similar downfalls but would be less f
 Strategy 3 is the best solution here, because it's efficient and eliminates race conditions outright. There is a simple queue of guests lined up by the door in sequence, and each takes their turn in the room before lining back up at the end of the queue. This disadvantage is that, with a small number of guests, this might take up too much time and also keep them from using their time in productive ways, but with a large amount of guests and little to do outside of the room, it's the most efficient way for the Minotaur to ensure everyone has at least one chance in the room and eliminate race conditions.
 
 Experimental Evaluation:
+Unfortunately, I was unable to complete this problem effectively on time for the assignment. I've been sick the past two weeks, with one ear totally losing hearing due to an infection, and this assignment fell by the wayside as I struggled to catch up on everything else I have while also trying to find time to rest and get better.
+
+As such "CrystalVase", which was my working title until I could appropriately retitle both programs (Never done as I didn't finish), is NOT complete and DOES NOT FUNCTION. I can explain the problems I'm facing, such as infinite loops and the program getting caught in race conditions. I've set it to only use 2 guests, as opposed to problem 1's 100 guests, to just find a way to make it work, but I've been unable to so far. With more time I might've found a solution, but I prioritized getting the documentation in order to at least get the points on that.
+
+Obviously this means I will not leave compilation notes. I do NOT recommend compiling or running this program, as it will hang and threads do not die properly.

@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class CrystalVase {
     public static void main(String[] args) {
-        VaseRoom vr = new VaseRoom(1);
+        VaseRoom vr = new VaseRoom(2);
         vr.vaseViewing();
     }
 }
@@ -32,19 +32,26 @@ class VaseRoom {
         @Override
         public void run() {
             do {
-                try {
-                    synchronized(this) {
-                        wait();
+                if (queue.peek() != this) {
+                    try {
+                        synchronized(this) {
+                            wait();
+                        }
+                    } catch (InterruptedException e) {
+                        System.out.println("ERROR!");
+                        e.printStackTrace();
+                        return;
                     }
-                } catch (InterruptedException e) {
-                    System.out.println("ERROR!");
-                    e.printStackTrace();
-                    return;
                 }
 
                 vase(id);
                 queue.remove(this);
                 System.out.println("Removed!");
+                if (queue.peek() != null) {
+                    synchronized(queue.peek()) {
+                        queue.peek().notify();
+                    }
+                }
                 if (rand.nextBoolean()) {
                     queue.add(this);
                     System.out.println("Added!");
@@ -60,12 +67,12 @@ class VaseRoom {
             queue.add(g);
         }
 
+        synchronized(queue.peek()) {
+            queue.peek().notify();
+        }
+
         while (!queue.isEmpty()) {
-            if (queue.peek() != null) {
-                synchronized(queue.peek()) {
-                    queue.peek().notify();
-                }
-            }
+            continue;
         }
     }
 }
