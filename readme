@@ -1,3 +1,5 @@
+WARNING: Problem 2, "CrystalVase", does NOT work, and should not be compiled. I explain why in the experimental evaluation section down below.
+
 **Problem 1**
 Experimental Evaluation:
 For Problem 1, I devised a strategy wherein the first guest to enter the labyrinth would have a different responsibility from all others, without any requirement of direct communication. The first person would be the only one who can re-order the cupcake, no other guests can do so. Furthermore, guests may only eat one cupcake. Thus, whenever the first guest happens upon an empty plate, they take note of that, incrementing a counter. When they've ordered as many cupcakes as there are guests, they alert the minotaur to that.
