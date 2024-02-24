@@ -1,0 +1,13 @@
+**Problem 1**
+Experimental Evaluation:
+
+
+**Problem 2**
+
+Strategy 1 is a heavily flawed strategy because it would lead to crowds all trying to get in the room at once. In a computing sense, threads simply trying to acquire a lock at the same time and potentially risking race conditions, and otherwise, preventing threads from doing anything productive in the meantime. The one advantage is that with a small number of guests, or threads, it would be the fastest and there would be no "waiting" for anything other than someone leaving.
+
+Strategy 2 is similar to 1, and would have similar downfalls but would be less faulty overall. In this strategy, there is a signal that a guest can observe without crowding the room, in passing, allowing them to go on being productive until they need to use the room. But unless there's much for the guests to do, they will still ultimate stick by the door and crowd around it, and whenever the sign is flipped to available, race conditions would kick in as several guests vie for the room at the same time. The same problem ultimately comes up here.
+
+Strategy 3 is the best solution here, because it's efficient and eliminates race conditions outright. There is a simple queue of guests lined up by the door in sequence, and each takes their turn in the room before lining back up at the end of the queue. This disadvantage is that, with a small number of guests, this might take up too much time and also keep them from using their time in productive ways, but with a large amount of guests and little to do outside of the room, it's the most efficient way for the Minotaur to ensure everyone has at least one chance in the room and eliminate race conditions.
+
+Experimental Evaluation:
